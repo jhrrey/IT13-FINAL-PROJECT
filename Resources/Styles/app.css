@@ -1,0 +1,171 @@
+/*
+ * VetCare typography and text colours.
+ * Applied to views with StyleClass="...". Colours mirror Resources/Styles/Colors.xaml.
+ *
+ * letter-spacing note: on Windows MAUI scales letter-spacing as if the font were 16px,
+ * so values here are (design px) x 16 / font-size. E.g. -1.5px at 64px = -0.375.
+ *
+ *   Navy #0A2E4F   Orange #D4421C   Body gray #5B6B7B
+ *   Light cyan on dark #9EE3F7      Text on dark #B9CCDD
+ */
+
+label {
+    font-family: DMSans;
+    font-size: 16;
+    color: #5B6B7B;
+}
+
+/* Small uppercase label above headings */
+.eyebrow {
+    font-family: DMSansSemiBold;
+    font-size: 13;
+    letter-spacing: 0.62;
+    color: #D4421C;
+    text-transform: uppercase;
+}
+
+.eyebrow-dark {
+    font-family: DMSansSemiBold;
+    font-size: 13;
+    letter-spacing: 0.62;
+    color: #9EE3F7;
+    text-transform: uppercase;
+}
+
+/* Headings: Nunito 800, tight letter spacing */
+.h1 {
+    font-family: NunitoExtraBold;
+    font-size: 64;
+    line-height: 1.1;
+    letter-spacing: -0.375;
+    color: #0A2E4F;
+}
+
+.h2 {
+    font-family: NunitoExtraBold;
+    font-size: 56;
+    line-height: 1.1;
+    letter-spacing: -0.34;
+    color: #0A2E4F;
+}
+
+.h2-dark {
+    font-family: NunitoExtraBold;
+    font-size: 54;
+    line-height: 1.1;
+    letter-spacing: -0.36;
+    color: #FFFFFF;
+}
+
+.card-heading {
+    font-family: NunitoExtraBold;
+    font-size: 38;
+    line-height: 1.15;
+    letter-spacing: -0.34;
+    color: #0A2E4F;
+    text-align: center;
+}
+
+.modal-heading {
+    font-family: NunitoExtraBold;
+    font-size: 32;
+    line-height: 1.15;
+    letter-spacing: -0.4;
+    color: #0A2E4F;
+}
+
+.card-title {
+    font-family: NunitoExtraBold;
+    font-size: 24;
+    line-height: 1.25;
+    letter-spacing: -0.27;
+    color: #0A2E4F;
+}
+
+.quote {
+    font-family: NunitoExtraBold;
+    font-size: 26;
+    line-height: 1.35;
+    letter-spacing: -0.18;
+    color: #0A2E4F;
+}
+
+.brand {
+    font-family: NunitoExtraBold;
+    font-size: 22;
+    letter-spacing: -0.22;
+    color: #0A2E4F;
+}
+
+/* Body copy */
+.lead {
+    font-size: 19;
+    line-height: 1.8;
+}
+
+.intro {
+    font-size: 18;
+    line-height: 1.8;
+}
+
+.body {
+    font-size: 16;
+    line-height: 1.7;
+}
+
+.body-on-dark {
+    font-size: 17;
+    line-height: 1.8;
+    color: #B9CCDD;
+}
+
+.small {
+    font-size: 13.5;
+    line-height: 1.5;
+}
+
+.strong {
+    font-family: DMSansBold;
+}
+
+/* Navigation and inline links */
+.nav-link {
+    font-family: DMSansMedium;
+    font-size: 17;
+    color: #2D4A63;
+}
+
+.link {
+    font-family: DMSansBold;
+    color: #0A2E4F;
+}
+
+.link-accent {
+    font-family: DMSansBold;
+    color: #D4421C;
+}
+
+/* Forms */
+.field-label {
+    font-family: DMSansBold;
+    font-size: 15;
+    color: #0A2E4F;
+}
+
+.field-error {
+    font-family: DMSansMedium;
+    font-size: 13.5;
+    color: #B83715;
+}
+
+.status {
+    font-family: DMSansMedium;
+    font-size: 14;
+    color: #0A2E4F;
+    text-align: center;
+}
+
+.tab-label {
+    font-family: DMSansBold;
+    font-size: 16;
+}

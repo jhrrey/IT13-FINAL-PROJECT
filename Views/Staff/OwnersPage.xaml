@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Owners list (PET CARE → Owners). Cards and table rows are built in OwnersPage.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Staff.OwnersPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="40,32,40,40" Spacing="20">
+
+            <!-- Page header -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16" Margin="0,0,0,4">
+                <controls:PageHeader Icon="contact" Title="Owners" Subtitle="Keep every pet parent's details in one place." />
+                <!-- Aligned with the bottom of the header text, not the top. -->
+                <controls:IconTextButton x:Name="AddButton"
+                                         Grid.Column="1"
+                                         Icon="user-plus"
+                                         Text="Add owner"
+                                         VerticalOptions="End" />
+            </Grid>
+
+            <!-- Summary cards -->
+            <Grid x:Name="SummaryGrid" ColumnSpacing="16" RowSpacing="16" />
+
+            <!-- Toolbar -->
+            <Border Style="{StaticResource WorkspaceCard}" Padding="14">
+                <Grid x:Name="ToolbarGrid" ColumnDefinitions="*,200" ColumnSpacing="12" RowSpacing="12">
+                    <Border x:Name="SearchBox" Style="{StaticResource InputBox}" HeightRequest="44" Padding="12,0">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                            <controls:LucideIcon Icon="search"
+                                                 StrokeColor="{StaticResource Muted}"
+                                                 WidthRequest="18"
+                                                 HeightRequest="18"
+                                                 VerticalOptions="Center" />
+                            <Entry x:Name="SearchEntry"
+                                   Grid.Column="1"
+                                   Style="{StaticResource InputEntry}"
+                                   Placeholder="Search name, contact no., or email" />
+                        </Grid>
+                    </Border>
+                    <Border x:Name="SortBox" Grid.Column="1" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                        <Picker x:Name="SortPicker"
+                                FontFamily="DMSans"
+                                FontSize="15"
+                                TextColor="{StaticResource Navy}"
+                                BackgroundColor="Transparent"
+                                VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Owners table -->
+            <Border Style="{StaticResource WorkspaceCard}" Padding="0">
+                <VerticalStackLayout>
+                    <ScrollView Orientation="Horizontal">
+                        <VerticalStackLayout x:Name="TableStack" />
+                    </ScrollView>
+                    <ContentView x:Name="StateHost" IsVisible="False" />
+                    <Grid x:Name="PagerRow" Padding="20,14" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                        <BoxView Grid.ColumnSpan="3"
+                                 HeightRequest="1"
+                                 Color="{StaticResource BorderColor}"
+                                 VerticalOptions="Start"
+                                 Margin="-20,-14,-20,0" />
+                        <Label x:Name="PagerLabel" FontSize="14" TextColor="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <controls:HoverButton x:Name="PrevButton" Grid.Column="1" Style="{StaticResource OutlineButton}" Text="Prev" HeightRequest="36" Padding="14,0" />
+                        <controls:HoverButton x:Name="NextButton" Grid.Column="2" Style="{StaticResource OutlineButton}" Text="Next" HeightRequest="36" Padding="14,0" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

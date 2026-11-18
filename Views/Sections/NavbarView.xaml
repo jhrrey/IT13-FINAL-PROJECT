@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 1. Navbar: logo on the left; text links on the right. -->
+<sections:SectionView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:sections="clr-namespace:VetCare.Views.Sections"
+                      xmlns:controls="clr-namespace:VetCare.Views.Controls"
+                      xmlns:models="clr-namespace:VetCare.Models"
+                      x:Class="VetCare.Views.Sections.NavbarView"
+                      x:DataType="models:NavbarContent"
+                      BackgroundColor="{StaticResource Surface}">
+
+    <Grid x:Name="Container"
+          HorizontalOptions="Center"
+          HeightRequest="90"
+          ColumnDefinitions="Auto,*"
+          ColumnSpacing="36">
+
+        <!-- Clinic logo (Resources/Images/logo.jpg). Remove Source to show the black placeholder. -->
+        <controls:LogoPlaceholder x:Name="Logo"
+                                  Source="logo.png"
+                                  WidthRequest="250"
+                                  HeightRequest="80"
+                                  VerticalOptions="Center" />
+
+        <HorizontalStackLayout x:Name="LinksStack"
+                               Grid.Column="1"
+                               Spacing="36"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center" />
+    </Grid>
+</sections:SectionView>

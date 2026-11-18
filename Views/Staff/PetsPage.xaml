@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Pets list (PET CARE → Pets). Cards and table rows are built in PetsPage.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Staff.PetsPage">
+
+    <ScrollView x:Name="PageScroll">
+        <VerticalStackLayout Padding="40,32,40,40" Spacing="20">
+
+            <!-- Page header -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16" Margin="0,0,0,4">
+                <controls:PageHeader Icon="paw-print" Title="Pets" Subtitle="Every furry, feathered, and fluffy patient in one place." />
+                <!-- Aligned with the bottom of the header text, not the top. -->
+                <controls:IconTextButton x:Name="AddButton"
+                                         Grid.Column="1"
+                                         Icon="plus"
+                                         Text="Add pet"
+                                         VerticalOptions="End" />
+            </Grid>
+
+            <!-- Summary cards -->
+            <Grid x:Name="SummaryGrid" ColumnSpacing="16" RowSpacing="16" />
+
+            <!-- Toolbar -->
+            <Border Style="{StaticResource WorkspaceCard}" Padding="14">
+                <Grid x:Name="ToolbarGrid" ColumnDefinitions="*,180,160,Auto" ColumnSpacing="12" RowSpacing="12">
+                    <Border x:Name="SearchBox" Style="{StaticResource InputBox}" HeightRequest="44" Padding="12,0">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                            <controls:LucideIcon Icon="search"
+                                                 StrokeColor="{StaticResource Muted}"
+                                                 WidthRequest="18"
+                                                 HeightRequest="18"
+                                                 VerticalOptions="Center" />
+                            <Entry x:Name="SearchEntry"
+                                   Grid.Column="1"
+                                   Style="{StaticResource InputEntry}"
+                                   Placeholder="Search pet or owner name" />
+                        </Grid>
+                    </Border>
+                    <Border x:Name="SpeciesBox" Grid.Column="1" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                        <Picker x:Name="SpeciesPicker"
+                                FontFamily="DMSans"
+                                FontSize="15"
+                                TextColor="{StaticResource Navy}"
+                                BackgroundColor="Transparent"
+                                VerticalOptions="Center" />
+                    </Border>
+                    <Border x:Name="SexBox" Grid.Column="2" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                        <Picker x:Name="SexPicker"
+                                FontFamily="DMSans"
+                                FontSize="15"
+                                TextColor="{StaticResource Navy}"
+                                BackgroundColor="Transparent"
+                                VerticalOptions="Center" />
+                    </Border>
+                    <!-- Card / table view toggle -->
+                    <Border x:Name="ViewToggle"
+                            Grid.Column="3"
+                            HeightRequest="44"
+                            Padding="3"
+                            Stroke="{StaticResource BorderColor}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="{StaticResource Surface}"
+                            HorizontalOptions="Start">
+                        <HorizontalStackLayout Spacing="2">
+                            <Border x:Name="CardViewButton"
+                                    WidthRequest="38"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 6"
+                                    SemanticProperties.Description="Card view">
+                                <controls:LucideIcon Icon="layout-grid"
+                                                     StrokeColor="{StaticResource Navy}"
+                                                     WidthRequest="18"
+                                                     HeightRequest="18"
+                                                     HorizontalOptions="Center"
+                                                     VerticalOptions="Center" />
+                            </Border>
+                            <Border x:Name="TableViewButton"
+                                    WidthRequest="38"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 6"
+                                    SemanticProperties.Description="Table view">
+                                <controls:LucideIcon Icon="list"
+                                                     StrokeColor="{StaticResource Navy}"
+                                                     WidthRequest="18"
+                                                     HeightRequest="18"
+                                                     HorizontalOptions="Center"
+                                                     VerticalOptions="Center" />
+                            </Border>
+                        </HorizontalStackLayout>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Loading / empty / error -->
+            <Border x:Name="StateCard" Style="{StaticResource WorkspaceCard}" Padding="8" IsVisible="False">
+                <ContentView x:Name="StateHost" />
+            </Border>
+
+            <!-- Card view -->
+            <Grid x:Name="CardsGrid" ColumnSpacing="16" RowSpacing="16" IsVisible="False" />
+
+            <!-- Table view -->
+            <Border x:Name="TableCard" Style="{StaticResource WorkspaceCard}" Padding="0" IsVisible="False">
+                <ScrollView x:Name="TableScroll" Orientation="Horizontal">
+                    <VerticalStackLayout x:Name="TableStack" />
+                </ScrollView>
+            </Border>
+
+            <!-- Pagination -->
+            <Grid x:Name="PagerRow" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" IsVisible="False">
+                <Label x:Name="PagerLabel" FontSize="14" TextColor="{StaticResource BodyText}" VerticalOptions="Center" />
+                <controls:HoverButton x:Name="PrevButton" Grid.Column="1" Style="{StaticResource OutlineButton}" Text="Prev" HeightRequest="36" Padding="14,0" />
+                <controls:HoverButton x:Name="NextButton" Grid.Column="2" Style="{StaticResource OutlineButton}" Text="Next" HeightRequest="36" Padding="14,0" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

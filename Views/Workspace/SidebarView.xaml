@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Left sidebar navigation: logo, clinic switcher, scrolling menu, and the user footer pinned to the bottom.
+     The menu sections and items are built by SidebarView.ShowMenu from the model. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Workspace.SidebarView"
+             WidthRequest="320"
+             BackgroundColor="{StaticResource SidebarBackground}">
+
+    <Grid>
+        <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+            <!-- 1. Logo -->
+            <controls:LogoPlaceholder Source="logo.png"
+                                      WidthRequest="210"
+                                      HeightRequest="70"
+                                      HorizontalOptions="Start"
+                                      Margin="16,20,16,20" />
+
+            <!-- 2. Clinic switcher card -->
+            <Border x:Name="ClinicCard"
+                    Grid.Row="1"
+                    Margin="16,0"
+                    Padding="14"
+                    BackgroundColor="{StaticResource Surface}"
+                    Stroke="{StaticResource BorderColor}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Navy}" Offset="0,2" Radius="10" Opacity="0.06" />
+                </Border.Shadow>
+
+                <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="12">
+                    <Border WidthRequest="44"
+                            HeightRequest="44"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="{StaticResource Cyan}">
+                        <controls:LucideIcon Icon="paw-print"
+                                             StrokeColor="{StaticResource Navy}"
+                                             WidthRequest="22"
+                                             HeightRequest="22"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="Center" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label x:Name="ClinicNameLabel"
+                               Text="VetCare Clinic"
+                               FontFamily="DMSansBold"
+                               FontSize="17"
+                               TextColor="{StaticResource Navy}"
+                               LineBreakMode="TailTruncation" />
+                        <Label Text="Care workspace"
+                               FontSize="14"
+                               TextColor="{StaticResource Muted}" />
+                    </VerticalStackLayout>
+
+                    <controls:LucideIcon x:Name="Chevron"
+                                         Grid.Column="2"
+                                         Icon="chevron-down"
+                                         StrokeColor="{StaticResource Navy}"
+                                         WidthRequest="20"
+                                         HeightRequest="20"
+                                         VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- 3. Menu (scrolls on short windows) -->
+            <ScrollView Grid.Row="2">
+                <VerticalStackLayout x:Name="MenuStack" Padding="16,0,16,16" />
+            </ScrollView>
+
+            <!-- 4. User footer -->
+            <Grid Grid.Row="3">
+                <BoxView HeightRequest="1" Color="{StaticResource SidebarBorder}" VerticalOptions="Start" />
+                <Grid Padding="16" ColumnDefinitions="44,*,Auto" ColumnSpacing="12">
+                    <Border WidthRequest="44"
+                            HeightRequest="44"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="{StaticResource Cyan}">
+                        <Label x:Name="AvatarLabel"
+                               Text="G"
+                               FontFamily="DMSansBold"
+                               FontSize="18"
+                               TextColor="{StaticResource Navy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label x:Name="UserNameLabel"
+                               Text="Guest access"
+                               FontFamily="DMSansBold"
+                               FontSize="16"
+                               TextColor="{StaticResource Navy}"
+                               LineBreakMode="TailTruncation" />
+                        <Label x:Name="UserRoleLabel"
+                               Text="Not signed in"
+                               FontSize="14"
+                               TextColor="{StaticResource Muted}" />
+                    </VerticalStackLayout>
+
+                    <!-- Sign out (shown only when someone is signed in) -->
+                    <Border x:Name="SignOutButton"
+                            Grid.Column="2"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="Transparent"
+                            VerticalOptions="Center"
+                            IsVisible="False"
+                            SemanticProperties.Description="Sign out"
+                            ToolTipProperties.Text="Sign out">
+                        <controls:LucideIcon Icon="log-out"
+                                             StrokeColor="{StaticResource MenuText}"
+                                             WidthRequest="20"
+                                             HeightRequest="20"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- 1px right border -->
+        <BoxView WidthRequest="1" Color="{StaticResource SidebarBorder}" HorizontalOptions="End" />
+
+        <!-- Clinic dropdown (Super Admin only). Clicking outside the list closes it. -->
+        <Grid x:Name="DropdownLayer" IsVisible="False">
+            <BoxView x:Name="DropdownDismiss" Color="Transparent" />
+            <Border x:Name="Dropdown"
+                    VerticalOptions="Start"
+                    Margin="16,0"
+                    Padding="6"
+                    BackgroundColor="{StaticResource Surface}"
+                    Stroke="{StaticResource BorderColor}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Navy}" Offset="0,8" Radius="24" Opacity="0.12" />
+                </Border.Shadow>
+                <ScrollView MaximumHeightRequest="320">
+                    <VerticalStackLayout x:Name="ClinicList" Spacing="2" />
+                </ScrollView>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentView>

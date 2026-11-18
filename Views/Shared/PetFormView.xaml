@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Add / Edit pet form, shown in a 460px side panel (SidePanelHost).
+     Fields are built in PetFormView.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Shared.PetFormView">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Header -->
+        <Grid Padding="24,18" ColumnDefinitions="*,Auto">
+            <Label x:Name="TitleLabel"
+                   FontFamily="NunitoExtraBold"
+                   FontSize="24"
+                   TextColor="{StaticResource Navy}"
+                   VerticalOptions="Center" />
+            <Border x:Name="CloseButton"
+                    Grid.Column="1"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20"
+                    BackgroundColor="Transparent"
+                    SemanticProperties.Description="Close">
+                <controls:LucideIcon Icon="x"
+                                     StrokeColor="{StaticResource NavyMuted}"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center" />
+            </Border>
+            <BoxView Grid.ColumnSpan="2"
+                     HeightRequest="1"
+                     Color="{StaticResource BorderColor}"
+                     VerticalOptions="End"
+                     Margin="-24,0,-24,-18" />
+        </Grid>
+
+        <!-- Fields -->
+        <ScrollView x:Name="FormScroll" Grid.Row="1">
+            <VerticalStackLayout Padding="24,20" Spacing="18">
+                <VerticalStackLayout x:Name="FieldsStack" Spacing="18" />
+
+                <Label x:Name="MessageLabel"
+                       IsVisible="False"
+                       FontFamily="DMSansMedium"
+                       FontSize="14"
+                       TextColor="{StaticResource Danger}" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Footer -->
+        <VerticalStackLayout Grid.Row="2" Padding="24,16" Spacing="10">
+            <BoxView HeightRequest="1" Color="{StaticResource BorderColor}" Margin="-24,-16,-24,6" />
+            <controls:HoverButton x:Name="SaveButton" Style="{StaticResource WorkspaceButton}" Text="Save pet" />
+            <!-- Cancel takes only its own width so "Save and book appointment" fits on one line. -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <controls:HoverButton x:Name="CancelButton" Style="{StaticResource OutlineButton}" Text="Cancel" Padding="22,0" />
+                <controls:HoverButton x:Name="SaveAndBookButton" Grid.Column="1" Style="{StaticResource NavyOutlineButton}" Text="Save and book appointment" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>

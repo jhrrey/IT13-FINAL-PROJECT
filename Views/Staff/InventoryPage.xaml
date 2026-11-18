@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Medicines & stock (PHARMACY & BILLING): summary cards, the medicines table and the stock history.
+     Rows are built in InventoryPage.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Staff.InventoryPage">
+
+    <ScrollView x:Name="PageScroll">
+        <VerticalStackLayout Padding="40,32,40,40" Spacing="20">
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16" Margin="0,0,0,4">
+                <controls:PageHeader Icon="warehouse" Title="Medicines &amp; stock" Subtitle="Know what's on the shelf, and what's running low." />
+                <controls:IconTextButton x:Name="AddButton" Grid.Column="1" Icon="plus" Text="Add medicine" VerticalOptions="End" IsVisible="False" />
+            </Grid>
+
+            <!-- Summary cards (Low / Out / Expiring filter the table) -->
+            <Grid x:Name="SummaryGrid" ColumnSpacing="16" RowSpacing="16" />
+
+            <!-- Tabs -->
+            <Grid HeightRequest="40">
+                <BoxView HeightRequest="1" Color="{StaticResource BorderColor}" VerticalOptions="End" />
+                <HorizontalStackLayout x:Name="TabsRow" Spacing="28" />
+            </Grid>
+
+            <!-- Tab 1: Medicines -->
+            <VerticalStackLayout x:Name="MedicinesSection" Spacing="16">
+                <Border Style="{StaticResource WorkspaceCard}" Padding="14">
+                    <Grid ColumnDefinitions="*,200,170" ColumnSpacing="12">
+                        <Border Style="{StaticResource InputBox}" HeightRequest="44" Padding="12,0">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <controls:LucideIcon Icon="search" StrokeColor="{StaticResource Muted}" WidthRequest="18" HeightRequest="18" VerticalOptions="Center" />
+                                <Entry x:Name="SearchEntry" Grid.Column="1" Style="{StaticResource InputEntry}" Placeholder="Search medicine" />
+                            </Grid>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                            <Picker x:Name="CategoryPicker" FontFamily="DMSans" FontSize="15" TextColor="{StaticResource Navy}" BackgroundColor="Transparent" VerticalOptions="Center" />
+                        </Border>
+                        <Border Grid.Column="2" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                            <Picker x:Name="StatusPicker" FontFamily="DMSans" FontSize="15" TextColor="{StaticResource Navy}" BackgroundColor="Transparent" VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
+                </Border>
+                <Border Style="{StaticResource WorkspaceCard}" Padding="0">
+                    <VerticalStackLayout>
+                        <ScrollView x:Name="MedicinesScroll" Orientation="Horizontal">
+                            <VerticalStackLayout x:Name="MedicinesStack" />
+                        </ScrollView>
+                        <ContentView x:Name="MedicinesState" IsVisible="False" />
+                        <Grid x:Name="PagerRow" Padding="20,14" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" IsVisible="False">
+                            <BoxView Grid.ColumnSpan="3" HeightRequest="1" Color="{StaticResource BorderColor}" VerticalOptions="Start" Margin="-20,-14,-20,0" />
+                            <Label x:Name="PagerLabel" FontSize="14" TextColor="{StaticResource BodyText}" VerticalOptions="Center" />
+                            <controls:HoverButton x:Name="PrevButton" Grid.Column="1" Style="{StaticResource OutlineButton}" Text="Prev" HeightRequest="36" Padding="14,0" />
+                            <controls:HoverButton x:Name="NextButton" Grid.Column="2" Style="{StaticResource OutlineButton}" Text="Next" HeightRequest="36" Padding="14,0" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Tab 2: Stock history -->
+            <VerticalStackLayout x:Name="HistorySection" Spacing="16" IsVisible="False">
+                <Border Style="{StaticResource WorkspaceCard}" Padding="14">
+                    <Grid ColumnDefinitions="Auto,150,150,*,190" ColumnSpacing="12">
+                        <controls:HoverButton x:Name="ClearDatesButton" Style="{StaticResource OutlineButton}" Text="All dates" HeightRequest="44" Padding="14,0" />
+                        <controls:DateBox x:Name="FromDate" Grid.Column="1" Placeholder="From" />
+                        <controls:DateBox x:Name="ToDate" Grid.Column="2" Placeholder="To" />
+                        <Border Grid.Column="3" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                            <Picker x:Name="HistoryMedicinePicker" FontFamily="DMSans" FontSize="15" TextColor="{StaticResource Navy}" BackgroundColor="Transparent" VerticalOptions="Center" />
+                        </Border>
+                        <Border Grid.Column="4" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                            <Picker x:Name="TypePicker" FontFamily="DMSans" FontSize="15" TextColor="{StaticResource Navy}" BackgroundColor="Transparent" VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
+                </Border>
+                <Border Style="{StaticResource WorkspaceCard}" Padding="0">
+                    <VerticalStackLayout>
+                        <ScrollView x:Name="HistoryScroll" Orientation="Horizontal">
+                            <VerticalStackLayout x:Name="HistoryStack" />
+                        </ScrollView>
+                        <ContentView x:Name="HistoryState" IsVisible="False" />
+                        <Grid x:Name="HistoryPagerRow" Padding="20,14" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" IsVisible="False">
+                            <BoxView Grid.ColumnSpan="3" HeightRequest="1" Color="{StaticResource BorderColor}" VerticalOptions="Start" Margin="-20,-14,-20,0" />
+                            <Label x:Name="HistoryPagerLabel" FontSize="14" TextColor="{StaticResource BodyText}" VerticalOptions="Center" />
+                            <controls:HoverButton x:Name="HistoryPrevButton" Grid.Column="1" Style="{StaticResource OutlineButton}" Text="Prev" HeightRequest="36" Padding="14,0" />
+                            <controls:HoverButton x:Name="HistoryNextButton" Grid.Column="2" Style="{StaticResource OutlineButton}" Text="Next" HeightRequest="36" Padding="14,0" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

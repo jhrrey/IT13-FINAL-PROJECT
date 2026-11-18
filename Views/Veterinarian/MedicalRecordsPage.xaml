@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Medical records list (PET CARE → Medical records). Rows are built in MedicalRecordsPage.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Veterinarian.MedicalRecordsPage">
+
+    <ScrollView x:Name="PageScroll">
+        <VerticalStackLayout Padding="40,32,40,40" Spacing="20">
+
+            <controls:PageHeader Icon="clipboard-plus"
+                                 Title="Medical records"
+                                 Subtitle="Every check-up, diagnosis, and treatment, all in one history."
+                                 Margin="0,0,0,4" />
+
+            <!-- Summary cards -->
+            <Grid x:Name="SummaryGrid" ColumnSpacing="16" RowSpacing="16" />
+
+            <!-- Toolbar -->
+            <Border Style="{StaticResource WorkspaceCard}" Padding="14">
+                <Grid x:Name="ToolbarGrid" ColumnDefinitions="210,170,170,Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                    <Border x:Name="SearchBox" Grid.ColumnSpan="5" Style="{StaticResource InputBox}" HeightRequest="44" Padding="12,0">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                            <controls:LucideIcon Icon="search" StrokeColor="{StaticResource Muted}" WidthRequest="18" HeightRequest="18" VerticalOptions="Center" />
+                            <Entry x:Name="SearchEntry" Grid.Column="1" Style="{StaticResource InputEntry}" Placeholder="Search pet, owner, or diagnosis" />
+                        </Grid>
+                    </Border>
+                    <Border x:Name="VetBox" Grid.Row="1" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                        <Picker x:Name="VetPicker" FontFamily="DMSans" FontSize="15" TextColor="{StaticResource Navy}" BackgroundColor="Transparent" VerticalOptions="Center" />
+                    </Border>
+                    <controls:DateBox x:Name="FromDate" Grid.Row="1" Grid.Column="1" Placeholder="From" />
+                    <controls:DateBox x:Name="ToDate" Grid.Row="1" Grid.Column="2" Placeholder="To" />
+                    <controls:HoverButton x:Name="ClearDatesButton" Grid.Row="1" Grid.Column="3" Style="{StaticResource OutlineButton}" Text="All dates" HeightRequest="44" Padding="14,0" />
+                    <!-- Vets only: "My records only". The label comes first: the Windows toggle keeps empty space after itself. -->
+                    <HorizontalStackLayout x:Name="MineRow" Grid.Row="1" Grid.Column="4" Spacing="10" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="False" Margin="8,0,0,0">
+                        <Label Text="My records only" FontFamily="DMSansMedium" FontSize="14" TextColor="{StaticResource Navy}" VerticalOptions="Center" />
+                        <Switch x:Name="MineSwitch" OnColor="{StaticResource Cyan}" ThumbColor="{StaticResource Navy}" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Records table -->
+            <Border Style="{StaticResource WorkspaceCard}" Padding="0">
+                <VerticalStackLayout>
+                    <ScrollView x:Name="TableScroll" Orientation="Horizontal">
+                        <VerticalStackLayout x:Name="TableStack" />
+                    </ScrollView>
+                    <ContentView x:Name="StateHost" IsVisible="False" />
+                    <Grid x:Name="PagerRow" Padding="20,14" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" IsVisible="False">
+                        <BoxView Grid.ColumnSpan="3" HeightRequest="1" Color="{StaticResource BorderColor}" VerticalOptions="Start" Margin="-20,-14,-20,0" />
+                        <Label x:Name="PagerLabel" FontSize="14" TextColor="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <controls:HoverButton x:Name="PrevButton" Grid.Column="1" Style="{StaticResource OutlineButton}" Text="Prev" HeightRequest="36" Padding="14,0" />
+                        <controls:HoverButton x:Name="NextButton" Grid.Column="2" Style="{StaticResource OutlineButton}" Text="Next" HeightRequest="36" Padding="14,0" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

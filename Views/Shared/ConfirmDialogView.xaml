@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Centered dialog over a dimmed background: "Deactivate …?" confirmation and the Reset password form. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Shared.ConfirmDialogView"
+             IsVisible="False">
+
+    <Grid>
+        <BoxView x:Name="Dim" Color="{StaticResource Dim}" />
+
+        <Border x:Name="Card"
+                Style="{StaticResource WorkspaceCard}"
+                WidthRequest="440"
+                Padding="28,24"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+            <VerticalStackLayout Spacing="14">
+                <controls:IconBadge x:Name="Icon" Size="44" IconSize="22" />
+
+                <Label x:Name="TitleLabel"
+                       FontFamily="NunitoExtraBold"
+                       FontSize="22"
+                       TextColor="{StaticResource Navy}" />
+                <Label x:Name="MessageLabel" FontSize="15" LineHeight="1.5" />
+
+                <VerticalStackLayout x:Name="FieldsStack" Spacing="16" IsVisible="False" />
+
+                <Label x:Name="ErrorLabel"
+                       IsVisible="False"
+                       FontFamily="DMSansMedium"
+                       FontSize="14"
+                       TextColor="{StaticResource Danger}" />
+
+                <!-- Cancel takes only its own width so longer actions ("Cancel appointment") fit. -->
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" Margin="0,6,0,0">
+                    <controls:HoverButton x:Name="CancelButton" Style="{StaticResource OutlineButton}" Text="Cancel" Padding="22,0" />
+                    <controls:HoverButton x:Name="ActionButton" Grid.Column="1" Style="{StaticResource WorkspaceButton}" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentView>

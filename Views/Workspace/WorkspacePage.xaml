@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- The signed-in workspace: sidebar on the left; on the right the top bar and the selected module's page. -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:workspace="clr-namespace:VetCare.Views.Workspace"
+             xmlns:shared="clr-namespace:VetCare.Views.Shared"
+             x:Class="VetCare.Views.Workspace.WorkspacePage"
+             Title="VetCare Veterinary Clinic"
+             Shell.NavBarIsVisible="False">
+
+    <Grid x:Name="Root" ColumnDefinitions="320,*" RowDefinitions="Auto,*">
+        <workspace:TopBarView x:Name="TopBarPanel" Grid.Column="1" />
+        <ContentView x:Name="ContentHost" Grid.Column="1" Grid.Row="1" />
+
+        <!-- Declared after the content so its clinic dropdown draws above it. -->
+        <workspace:SidebarView x:Name="SidebarPanel" Grid.RowSpan="2" />
+
+        <!-- Account menu (opened from the profile chip), above everything. -->
+        <shared:ActionsMenuLayer x:Name="AccountMenuLayer" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+    </Grid>
+</ContentPage>

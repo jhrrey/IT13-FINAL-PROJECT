@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Owner profile (opens when an owner row is clicked). Tab contents are built in OwnerDetailsPage.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Staff.OwnerDetailsPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="40,28,40,40" Spacing="20">
+
+            <!-- Back link -->
+            <HorizontalStackLayout x:Name="BackLink" Spacing="6" HorizontalOptions="Start">
+                <controls:LucideIcon Icon="arrow-left"
+                                     StrokeColor="{StaticResource Navy}"
+                                     WidthRequest="18"
+                                     HeightRequest="18"
+                                     VerticalOptions="Center" />
+                <controls:TextLink x:Name="BackText" Text="Owners" StyleClass="link" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!-- Header card -->
+            <Border Style="{StaticResource WorkspaceCard}" Padding="24">
+                <Grid x:Name="HeaderGrid" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="20" RowSpacing="16">
+                    <Border WidthRequest="64"
+                            HeightRequest="64"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 12"
+                            BackgroundColor="{StaticResource Cyan}"
+                            VerticalOptions="Start">
+                        <Label x:Name="AvatarLabel"
+                               FontFamily="DMSansBold"
+                               FontSize="22"
+                               TextColor="{StaticResource Navy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="10">
+                        <HorizontalStackLayout Spacing="12">
+                            <Label x:Name="NameLabel"
+                                   FontFamily="NunitoExtraBold"
+                                   FontSize="26"
+                                   CharacterSpacing="-0.3"
+                                   TextColor="{StaticResource Navy}"
+                                   VerticalOptions="Center" />
+                            <ContentView x:Name="SyncHost" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <VerticalStackLayout x:Name="InfoRows" Spacing="6" />
+                    </VerticalStackLayout>
+
+                    <HorizontalStackLayout x:Name="ButtonsRow" Grid.Column="2" Spacing="10" VerticalOptions="Start">
+                        <controls:HoverButton x:Name="EditButton" Style="{StaticResource OutlineButton}" Text="Edit" />
+                        <controls:HoverButton x:Name="AddPetButton" Style="{StaticResource OutlineButton}" Text="Add pet" />
+                        <controls:HoverButton x:Name="BookButton" Style="{StaticResource WorkspaceButton}" Text="Book appointment" />
+                    </HorizontalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Stat chips -->
+            <FlexLayout x:Name="StatsRow" Wrap="Wrap" JustifyContent="Start" />
+
+            <!-- Tabs -->
+            <Grid HeightRequest="40">
+                <BoxView HeightRequest="1" Color="{StaticResource BorderColor}" VerticalOptions="End" />
+                <HorizontalStackLayout x:Name="TabsRow" Spacing="28" />
+            </Grid>
+
+            <ContentView x:Name="TabContent" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

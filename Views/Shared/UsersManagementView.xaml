@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- "Users & roles" page body, shared by StaffAccountsPage (Administrator) and ClinicAdminsPage (Super Admin).
+     Cards, table rows and the permission table are built in UsersManagementView.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             xmlns:shared="clr-namespace:VetCare.Views.Shared"
+             x:Class="VetCare.Views.Shared.UsersManagementView">
+
+    <Grid x:Name="Root">
+        <ScrollView>
+            <VerticalStackLayout Padding="40,32,40,40">
+
+                <!-- Page header -->
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                    <controls:PageHeader x:Name="Header" />
+                    <!-- Aligned with the bottom of the header text, not the top. -->
+                    <controls:IconTextButton x:Name="AddButton"
+                                             Grid.Column="1"
+                                             Icon="user-plus"
+                                             Text="Add user"
+                                             VerticalOptions="End" />
+                </Grid>
+
+                <!-- Tabs -->
+                <Grid Margin="0,24,0,24" HeightRequest="40">
+                    <BoxView HeightRequest="1" Color="{StaticResource BorderColor}" VerticalOptions="End" />
+                    <HorizontalStackLayout x:Name="TabsRow" Spacing="28" />
+                </Grid>
+
+                <!-- USERS TAB -->
+                <VerticalStackLayout x:Name="UsersTab" Spacing="20">
+                    <Grid x:Name="SummaryGrid" ColumnSpacing="16" RowSpacing="16" />
+
+                    <Border Style="{StaticResource WorkspaceCard}" Padding="14">
+                        <Grid x:Name="ToolbarGrid" ColumnSpacing="12" RowSpacing="12">
+                            <Border x:Name="SearchBox" Style="{StaticResource InputBox}" HeightRequest="44" Padding="12,0">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                    <controls:LucideIcon Icon="search"
+                                                         StrokeColor="{StaticResource Muted}"
+                                                         WidthRequest="18"
+                                                         HeightRequest="18"
+                                                         VerticalOptions="Center" />
+                                    <Entry x:Name="SearchEntry"
+                                           Grid.Column="1"
+                                           Style="{StaticResource InputEntry}"
+                                           Placeholder="Search name, username, or email" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource WorkspaceCard}" Padding="0">
+                        <VerticalStackLayout>
+                            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Default">
+                                <VerticalStackLayout x:Name="TableStack" />
+                            </ScrollView>
+                            <ContentView x:Name="StateHost" IsVisible="False" />
+                            <Grid x:Name="PagerRow" Padding="20,14" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                <BoxView Grid.ColumnSpan="3"
+                                         HeightRequest="1"
+                                         Color="{StaticResource BorderColor}"
+                                         VerticalOptions="Start"
+                                         Margin="-20,-14,-20,0" />
+                                <Label x:Name="PagerLabel" FontSize="14" TextColor="{StaticResource BodyText}" VerticalOptions="Center" />
+                                <controls:HoverButton x:Name="PrevButton" Grid.Column="1" Style="{StaticResource OutlineButton}" Text="Prev" HeightRequest="36" Padding="14,0" />
+                                <controls:HoverButton x:Name="NextButton" Grid.Column="2" Style="{StaticResource OutlineButton}" Text="Next" HeightRequest="36" Padding="14,0" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- ROLES & PERMISSIONS TAB (read-only) -->
+                <VerticalStackLayout x:Name="RolesTab" IsVisible="False" Spacing="20">
+                    <Grid x:Name="RoleCardsGrid" ColumnSpacing="16" RowSpacing="16" />
+                    <Label Text="Roles are fixed by the system and can't be edited."
+                           FontSize="14"
+                           TextColor="{StaticResource Muted}" />
+                    <Border Style="{StaticResource WorkspaceCard}" Padding="0">
+                        <ScrollView Orientation="Horizontal">
+                            <VerticalStackLayout x:Name="PermissionStack" />
+                        </ScrollView>
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Row actions menu, side panel and dialog (in drawing order) -->
+        <shared:ActionsMenuLayer x:Name="ActionsMenu" />
+        <shared:SidePanelHost x:Name="SidePanel" />
+        <shared:ConfirmDialogView x:Name="ConfirmDialog" />
+    </Grid>
+</ContentView>

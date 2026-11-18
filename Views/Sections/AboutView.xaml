@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 5. About: dark navy band with the logo card on the left and the story on the right. -->
+<sections:SectionView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:sections="clr-namespace:VetCare.Views.Sections"
+                      xmlns:controls="clr-namespace:VetCare.Views.Controls"
+                      xmlns:models="clr-namespace:VetCare.Models"
+                      x:Class="VetCare.Views.Sections.AboutView"
+                      x:DataType="models:AboutContent"
+                      BackgroundColor="{StaticResource DarkSection}">
+
+    <Grid MinimumHeightRequest="540">
+
+        <!-- Decorative heart-pulse in the bottom-right corner -->
+        <controls:LucideIcon x:Name="Decor"
+                             Icon="heart-pulse"
+                             StrokeColor="{StaticResource AboutDecor}"
+                             WidthRequest="120"
+                             HeightRequest="120"
+                             HorizontalOptions="End"
+                             VerticalOptions="End"
+                             Margin="0,0,48,40" />
+
+        <Grid x:Name="Container"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              Padding="0,96"
+              ColumnDefinitions="40*,60*"
+              RowDefinitions="Auto,Auto"
+              ColumnSpacing="56"
+              RowSpacing="48">
+
+            <VerticalStackLayout x:Name="Media"
+                                 WidthRequest="370"
+                                 HorizontalOptions="Start"
+                                 VerticalOptions="Center">
+                <Border BackgroundColor="{StaticResource Surface}"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12"
+                        HeightRequest="130">
+                    <!-- LOGO PLACEHOLDER: set Logo.Source to show the real logo. -->
+                    <controls:LogoPlaceholder x:Name="Logo" Source="logo.png" />
+                </Border>
+
+                <controls:IconBadge x:Name="Badge"
+                                    Icon="paw-print"
+                                    Size="54"
+                                    IconColor="{StaticResource CyanOnDark}"
+                                    OutlineColor="{StaticResource CyanOnDark}"
+                                    HorizontalOptions="End"
+                                    Margin="0,28,40,0" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Copy" Grid.Column="1" VerticalOptions="Center">
+                <Label Text="{Binding Eyebrow}" StyleClass="eyebrow-dark" Margin="0,0,0,18" />
+
+                <Label x:Name="TitleLabel" StyleClass="h2-dark" Margin="0,0,0,24">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding TitleLine1}" FontFamily="NunitoExtraBold" TextColor="White" CharacterSpacing="-0.36" />
+                            <Span Text="&#10;" />
+                            <Span Text="{Binding TitleLine2}" FontFamily="NunitoExtraBold" TextColor="{StaticResource CyanOnDark}" CharacterSpacing="-0.36" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Text="{Binding Text}"
+                       StyleClass="body-on-dark"
+                       MaximumWidthRequest="560"
+                       HorizontalOptions="Start"
+                       Margin="0,0,0,36" />
+
+                <controls:HoverButton x:Name="CtaButton"
+                        Style="{StaticResource PrimaryButton}"
+                        Text="{Binding Cta.Label, StringFormat='{0}  →'}"
+                        HorizontalOptions="Start"
+                        Clicked="OnCtaClicked" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</sections:SectionView>

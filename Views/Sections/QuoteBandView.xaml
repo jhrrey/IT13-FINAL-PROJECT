@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 3. Quote band: light-cyan strip with the quote, a thin divider, and a subtext. -->
+<sections:SectionView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:sections="clr-namespace:VetCare.Views.Sections"
+                      xmlns:models="clr-namespace:VetCare.Models"
+                      x:Class="VetCare.Views.Sections.QuoteBandView"
+                      x:DataType="models:QuoteContent"
+                      BackgroundColor="{StaticResource CyanSoft}">
+
+    <Grid MinimumHeightRequest="160">
+        <VerticalStackLayout x:Name="Container"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Padding="0,36"
+                             Spacing="12">
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="28">
+                <Label x:Name="QuoteLabel"
+                       Text="{Binding Text}"
+                       StyleClass="quote"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Center" />
+                <BoxView x:Name="Divider"
+                         WidthRequest="1"
+                         HeightRequest="44"
+                         Color="{StaticResource QuoteDivider}"
+                         VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label Text="{Binding Subtext}"
+                   FontSize="17"
+                   HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </Grid>
+</sections:SectionView>

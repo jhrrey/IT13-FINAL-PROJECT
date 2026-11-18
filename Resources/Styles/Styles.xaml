@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Control styles that CSS cannot express in MAUI (shapes, shadows, hover states). -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:controls="clr-namespace:VetCare.Views.Controls">
+
+    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackground}" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <!-- Orange button: white bold text, 6px radius.
+         The darker hover/pressed colour is applied in MauiProgram.DarkenButtonsOnHover. -->
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Orange}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontFamily" Value="DMSansBold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="HeightRequest" Value="54" />
+        <Setter Property="Padding" Value="28,0" />
+    </Style>
+
+    <Style x:Key="SmallButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="HeightRequest" Value="46" />
+        <Setter Property="Padding" Value="22,0" />
+    </Style>
+
+    <!-- Workspace buttons are 44px tall (User Management spec). -->
+    <Style x:Key="WorkspaceButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="Padding" Value="20,0" />
+    </Style>
+
+    <!-- Gray outline button (e.g. Cancel). -->
+    <Style x:Key="OutlineButton" TargetType="controls:HoverButton" BasedOn="{StaticResource WorkspaceButton}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+        <Setter Property="TextColor" Value="{StaticResource Navy}" />
+        <Setter Property="BorderColor" Value="{StaticResource BorderColor}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="HoverBackgroundColor" Value="{StaticResource RowHover}" />
+    </Style>
+
+    <!-- Navy outline button (secondary action, e.g. "Save and add pet"). -->
+    <Style x:Key="NavyOutlineButton" TargetType="controls:HoverButton" BasedOn="{StaticResource OutlineButton}">
+        <Setter Property="BorderColor" Value="{StaticResource Navy}" />
+    </Style>
+
+    <!-- Mint button ("Complete" a consultation). -->
+    <Style x:Key="MintButton" TargetType="controls:HoverButton" BasedOn="{StaticResource WorkspaceButton}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Mint}" />
+        <Setter Property="TextColor" Value="{StaticResource CompletedText}" />
+        <Setter Property="HoverBackgroundColor" Value="#A9E8D2" />
+    </Style>
+
+    <!-- Red text on white ("Cancel" an appointment). -->
+    <Style x:Key="DangerOutlineButton" TargetType="controls:HoverButton" BasedOn="{StaticResource OutlineButton}">
+        <Setter Property="TextColor" Value="{StaticResource Danger}" />
+        <Setter Property="BorderColor" Value="{StaticResource DangerSoft}" />
+        <Setter Property="HoverBackgroundColor" Value="{StaticResource DangerSoft}" />
+    </Style>
+
+    <!-- Red button for destructive actions (Deactivate). -->
+    <Style x:Key="DangerButton" TargetType="controls:HoverButton" BasedOn="{StaticResource WorkspaceButton}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Danger}" />
+        <Setter Property="HoverBackgroundColor" Value="{StaticResource DangerHover}" />
+    </Style>
+
+    <!-- White card used across the workspace: 12px radius, 1px border, very soft shadow. -->
+    <Style x:Key="WorkspaceCard" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+        <Setter Property="Stroke" Value="{StaticResource BorderColor}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Shadow">
+            <Shadow Brush="{StaticResource Navy}" Offset="0,2" Radius="10" Opacity="0.05" />
+        </Setter>
+    </Style>
+
+    <!-- Account card: white, 1px light-blue border, 12px radius, soft large shadow. -->
+    <Style x:Key="AuthCard" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+        <Setter Property="Stroke" Value="{StaticResource BorderColor}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="40" />
+        <Setter Property="Shadow">
+            <Shadow Brush="{StaticResource Navy}" Offset="0,24" Radius="48" Opacity="0.14" />
+        </Setter>
+    </Style>
+
+    <!-- "Create account" modal: like the account card, with a deeper shadow over the blurred page.
+         Padding lives on the inner layout so the content can scroll on short windows. -->
+    <Style x:Key="ModalCard" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+        <Setter Property="Stroke" Value="{StaticResource BorderColor}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Shadow">
+            <Shadow Brush="{StaticResource Navy}" Offset="0,24" Radius="60" Opacity="0.25" />
+        </Setter>
+    </Style>
+
+    <!-- Rounded box drawn around each Entry. -->
+    <Style x:Key="InputBox" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource InputBackground}" />
+        <Setter Property="Stroke" Value="{StaticResource BorderColor}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="Padding" Value="16,0" />
+    </Style>
+
+    <Style x:Key="InputEntry" TargetType="Entry">
+        <Setter Property="FontFamily" Value="DMSans" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="{StaticResource Navy}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Placeholder}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <!-- Black block that stands in for the logo. -->
+    <Style x:Key="LogoBlock" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="Black" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 4" />
+    </Style>
+
+</ResourceDictionary>

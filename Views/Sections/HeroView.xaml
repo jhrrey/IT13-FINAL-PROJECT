@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 2. Hero: headline and calls to action (45%) beside the account card (55%). -->
+<sections:SectionView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:sections="clr-namespace:VetCare.Views.Sections"
+                      xmlns:controls="clr-namespace:VetCare.Views.Controls"
+                      xmlns:models="clr-namespace:VetCare.Models"
+                      x:Class="VetCare.Views.Sections.HeroView"
+                      x:DataType="models:HeroContent">
+
+    <Grid x:Name="Container"
+          HorizontalOptions="Center"
+          Padding="0,48,0,96"
+          ColumnDefinitions="45*,55*"
+          RowDefinitions="Auto,Auto"
+          ColumnSpacing="40"
+          RowSpacing="56">
+
+        <!-- Left column -->
+        <VerticalStackLayout x:Name="CopyColumn" VerticalOptions="Center">
+
+            <HorizontalStackLayout Spacing="8" Margin="0,0,0,18">
+                <controls:LucideIcon Icon="paw-print"
+                                     StrokeColor="{StaticResource Orange}"
+                                     WidthRequest="16"
+                                     HeightRequest="16"
+                                     VerticalOptions="Center" />
+                <Label Text="{Binding Eyebrow}" StyleClass="eyebrow" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="TitleLabel" StyleClass="h1" Margin="0,0,0,26">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding TitleLine1}" FontFamily="NunitoExtraBold" TextColor="{StaticResource Navy}" CharacterSpacing="-0.375" />
+                        <Span Text="&#10;" />
+                        <Span Text="{Binding TitleLine2Prefix}" FontFamily="NunitoExtraBold" TextColor="{StaticResource Navy}" CharacterSpacing="-0.375" />
+                        <Span Text="{Binding TitleLine2Accent}" FontFamily="NunitoExtraBold" TextColor="{StaticResource Orange}" CharacterSpacing="-0.375" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label x:Name="LeadLabel"
+                   Text="{Binding Lead}"
+                   StyleClass="lead"
+                   MaximumWidthRequest="400"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,38" />
+
+            <Grid x:Name="ActionsGrid"
+                  ColumnDefinitions="Auto,Auto"
+                  RowDefinitions="Auto,Auto"
+                  ColumnSpacing="32"
+                  RowSpacing="18"
+                  HorizontalOptions="Start"
+                  Margin="0,0,0,44">
+                <controls:HoverButton x:Name="PrimaryButton"
+                        Style="{StaticResource PrimaryButton}"
+                        Text="{Binding PrimaryCta.Label, StringFormat='{0}  →'}"
+                        WidthRequest="240"
+                        Clicked="OnPrimaryClicked" />
+                <controls:TextLink x:Name="SecondaryLink"
+                                   Grid.Column="1"
+                                   Text="{Binding SecondaryCta.Label}"
+                                   StyleClass="link"
+                                   VerticalOptions="Center"
+                                   Clicked="OnSecondaryClicked" />
+            </Grid>
+
+            <HorizontalStackLayout Spacing="14">
+                <controls:IconBadge Icon="paw-print"
+                                    Size="48"
+                                    IconSize="22"
+                                    CircleColor="{StaticResource Cyan}"
+                                    IconColor="{StaticResource Navy}" />
+                <Label x:Name="NoteLabel"
+                       Text="{Binding Note}"
+                       StyleClass="strong"
+                       MaximumWidthRequest="358"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <!-- Right column: account card -->
+        <sections:AuthCardView x:Name="AuthCard"
+                               Grid.Column="1"
+                               WidthRequest="490"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center" />
+    </Grid>
+</sections:SectionView>

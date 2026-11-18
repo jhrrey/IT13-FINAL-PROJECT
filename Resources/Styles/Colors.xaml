@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Design tokens. Keep in sync with Resources/Styles/app.css (CSS cannot read XAML resources). -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="PageBackground">#F5FAFD</Color>
+    <Color x:Key="Surface">#FFFFFF</Color>
+    <Color x:Key="Navy">#0A2E4F</Color>
+    <Color x:Key="NavyMuted">#2D4A63</Color>
+    <Color x:Key="Orange">#D4421C</Color>
+    <Color x:Key="OrangeHover">#B83715</Color>
+    <Color x:Key="BodyText">#5B6B7B</Color>
+    <Color x:Key="Placeholder">#8A99A8</Color>
+    <Color x:Key="Cyan">#B8F0F2</Color>
+    <Color x:Key="CyanSoft">#D3EEF8</Color>
+    <Color x:Key="Mint">#C4F1E1</Color>
+    <Color x:Key="PaleBlue">#DCEBFB</Color>
+    <Color x:Key="DarkSection">#002B4E</Color>
+    <Color x:Key="CyanOnDark">#9EE3F7</Color>
+    <Color x:Key="TextOnDark">#B9CCDD</Color>
+    <Color x:Key="BorderColor">#CFE3EC</Color>
+    <Color x:Key="InputBackground">#F2F8FB</Color>
+
+    <!-- Workspace sidebar -->
+    <Color x:Key="SidebarBackground">#F7FBFD</Color>
+    <Color x:Key="SidebarBorder">#DDEBF1</Color>
+    <Color x:Key="MenuText">#3E4C5E</Color>
+    <Color x:Key="SectionLabel">#3B4A5A</Color>
+    <Color x:Key="Muted">#6B7A89</Color>
+    <Color x:Key="MenuHover">#EAF6FA</Color>
+
+    <!-- User management: badges, status, sync -->
+    <Color x:Key="RowHover">#F2F8FB</Color>
+    <Color x:Key="Teal">#0F766E</Color>
+    <Color x:Key="OrangeSoft">#FDE8E1</Color>
+    <Color x:Key="Purple">#6941C6</Color>
+    <Color x:Key="PurpleSoft">#EFE7FF</Color>
+    <Color x:Key="Success">#027A48</Color>
+    <Color x:Key="SuccessDot">#12B76A</Color>
+    <Color x:Key="SuccessSoft">#E7F7EE</Color>
+    <Color x:Key="Warning">#B54708</Color>
+    <Color x:Key="WarningSoft">#FEF0C7</Color>
+    <Color x:Key="Danger">#D92D20</Color>
+    <Color x:Key="DangerHover">#B42318</Color>
+    <Color x:Key="DangerSoft">#FEE4E2</Color>
+    <Color x:Key="NeutralDot">#98A2B3</Color>
+    <Color x:Key="NeutralSoft">#EEF2F6</Color>
+    <Color x:Key="WarningBox">#FFF4E0</Color>       <!-- duplicate-owner warning background -->
+    <Color x:Key="WarningBorder">#F5C46B</Color>
+    <Color x:Key="Dim">#660A2E4F</Color>          <!-- navy at 40% for dimmed backgrounds -->
+
+    <!-- Pre-blended tints (no transparency, so they render the same everywhere). -->
+    <Color x:Key="CardHoverBorder">#9FD4E3</Color>  <!-- pet card border on hover -->
+
+    <!-- Appointment statuses (pills, card borders, calendar blocks) -->
+    <Color x:Key="ConsultText">#8A5A00</Color>      <!-- In Consultation text, on WarningBox -->
+    <Color x:Key="CompletedText">#1E6B4F</Color>    <!-- Completed text, on Mint -->
+    <Color x:Key="LightGray">#EEF1F4</Color>        <!-- Cancelled background -->
+    <Color x:Key="CyanStrong">#4FCBD3</Color>       <!-- Checked In accent line -->
+    <Color x:Key="PaleBlueStrong">#8DB8EC</Color>   <!-- Scheduled accent line -->
+    <Color x:Key="CardHover">#E6F5FB</Color>        <!-- CyanSoft at 45% over the page -->
+    <Color x:Key="QuoteDivider">#9BB8C9</Color>     <!-- Navy at 28% over CyanSoft -->
+    <Color x:Key="TabActiveFill">#FEF9F8</Color>    <!-- Orange at 3% over white -->
+    <Color x:Key="TabActiveOutline">#F8E1DB</Color> <!-- Orange at 16% over white -->
+    <Color x:Key="AboutDecor">#12436E</Color>       <!-- #3D7AB8 at 30% over DarkSection -->
+
+</ResourceDictionary>

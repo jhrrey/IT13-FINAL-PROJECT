@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Add / Edit user form, shown in the 440px side panel (SidePanelHost).
+     Text fields are built from the setup in UserFormView.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Shared.UserFormView">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Header -->
+        <Grid Padding="24,18" ColumnDefinitions="*,Auto">
+            <Label x:Name="TitleLabel"
+                   FontFamily="NunitoExtraBold"
+                   FontSize="24"
+                   TextColor="{StaticResource Navy}"
+                   VerticalOptions="Center" />
+            <Border x:Name="CloseButton"
+                    Grid.Column="1"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20"
+                    BackgroundColor="Transparent"
+                    SemanticProperties.Description="Close">
+                <controls:LucideIcon Icon="x"
+                                     StrokeColor="{StaticResource NavyMuted}"
+                                     WidthRequest="20"
+                                     HeightRequest="20"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center" />
+            </Border>
+            <BoxView Grid.ColumnSpan="2"
+                     HeightRequest="1"
+                     Color="{StaticResource BorderColor}"
+                     VerticalOptions="End"
+                     Margin="-24,0,-24,-18" />
+        </Grid>
+
+        <!-- Fields -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24,20" Spacing="18">
+                <VerticalStackLayout x:Name="TopFields" Spacing="18" />
+                <ContentView x:Name="RoleHost" />
+                <ContentView x:Name="ClinicHost" />
+                <VerticalStackLayout x:Name="PasswordFields" Spacing="18" />
+
+                <Grid x:Name="StatusRow" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                        <Label Text="Status" StyleClass="field-label" />
+                        <Label x:Name="StatusHint" FontSize="13" TextColor="{StaticResource Muted}" />
+                    </VerticalStackLayout>
+                    <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                        <Label x:Name="StatusText"
+                               FontFamily="DMSansMedium"
+                               FontSize="14"
+                               TextColor="{StaticResource Navy}"
+                               VerticalOptions="Center" />
+                        <Switch x:Name="StatusSwitch"
+                                OnColor="{StaticResource Orange}"
+                                VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Border x:Name="OfflineNote"
+                        IsVisible="False"
+                        Padding="12,10"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 8"
+                        BackgroundColor="{StaticResource WarningSoft}">
+                    <HorizontalStackLayout Spacing="8">
+                        <controls:LucideIcon Icon="wifi-off"
+                                             StrokeColor="{StaticResource Warning}"
+                                             WidthRequest="16"
+                                             HeightRequest="16"
+                                             VerticalOptions="Center" />
+                        <Label Text="Connect to the internet to create or reset accounts."
+                               FontSize="13"
+                               TextColor="{StaticResource Warning}"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <Label x:Name="MessageLabel"
+                       IsVisible="False"
+                       FontFamily="DMSansMedium"
+                       FontSize="14"
+                       TextColor="{StaticResource Danger}" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Footer -->
+        <Grid Grid.Row="2" Padding="24,16" ColumnDefinitions="*,*" ColumnSpacing="12">
+            <BoxView Grid.ColumnSpan="2"
+                     HeightRequest="1"
+                     Color="{StaticResource BorderColor}"
+                     VerticalOptions="Start"
+                     Margin="-24,-16,-24,0" />
+            <controls:HoverButton x:Name="CancelButton" Style="{StaticResource OutlineButton}" Text="Cancel" />
+            <controls:HoverButton x:Name="SaveButton" Grid.Column="1" Style="{StaticResource WorkspaceButton}" Text="Save user" />
+        </Grid>
+    </Grid>
+</ContentView>

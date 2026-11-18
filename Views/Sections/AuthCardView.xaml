@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- The account card: "Sign in" / "Create account" tabs and their form.
+     The fields are built from the model by AuthCardView.ShowMode. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Sections.AuthCardView">
+
+    <Border x:Name="Card" Style="{StaticResource AuthCard}">
+        <VerticalStackLayout>
+
+            <!-- VetCare paw mark (the circle from the logo, Resources/Images/paw_logo.png) -->
+            <Image Source="paw_logo.png"
+                   WidthRequest="64"
+                   HeightRequest="64"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,18"
+                   SemanticProperties.Description="VetCare" />
+
+            <Label x:Name="EyebrowLabel"
+                   StyleClass="eyebrow"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,0,10" />
+
+            <Label x:Name="TitleLabel" StyleClass="card-heading" />
+
+            <Label x:Name="SubtextLabel"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,8,0,28" />
+
+            <Grid x:Name="TabsGrid" ColumnDefinitions="*,*" Margin="0,0,0,28" />
+
+            <VerticalStackLayout x:Name="FieldsStack" Spacing="18" />
+
+            <controls:HoverButton x:Name="SubmitButton"
+                    Style="{StaticResource PrimaryButton}"
+                    Margin="0,26,0,0"
+                    Clicked="OnSubmitClicked" />
+
+            <!-- Shown when sign-in is blocked (computer turned off, clinic not active, account inactive …): red text only. -->
+            <VerticalStackLayout x:Name="WarningBox" IsVisible="False" Spacing="2" Margin="0,14,0,0">
+                <Label x:Name="WarningTitle"
+                       FontFamily="DMSansBold"
+                       FontSize="14.5"
+                       TextColor="{StaticResource Danger}"
+                       HorizontalTextAlignment="Center" />
+                <Label x:Name="WarningText"
+                       FontSize="14"
+                       TextColor="{StaticResource Danger}"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+
+            <Label x:Name="StatusLabel"
+                   StyleClass="status"
+                   IsVisible="False"
+                   Margin="0,14,0,0" />
+
+            <Label x:Name="FootnoteLabel"
+                   StyleClass="small"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,18,0,0" />
+
+            <!-- Shown only while no Super Admin account exists (first-time setup). -->
+            <controls:TextLink x:Name="SetupLink"
+                               Text="First time here? Set up the Super Admin account →"
+                               StyleClass="link-accent"
+                               FontSize="14"
+                               HorizontalOptions="Center"
+                               Margin="0,12,0,0"
+                               IsVisible="False"
+                               Clicked="OnSetupClicked" />
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

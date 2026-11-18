@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- The landing / login screen: all sections stacked in one scrolling page,
+     with the "Create account" modal layered on top (hidden until opened). -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sections="clr-namespace:VetCare.Views.Sections"
+             x:Class="VetCare.Views.LandingPage"
+             Title="VetCare Veterinary Clinic"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <ScrollView x:Name="Scroller">
+            <VerticalStackLayout>
+                <sections:NavbarView x:Name="Navbar" />
+                <sections:HeroView x:Name="Hero" />
+                <sections:QuoteBandView x:Name="Quote" />
+                <sections:ServicesView x:Name="Services" />
+                <sections:AboutView x:Name="About" />
+                <sections:FooterView x:Name="Footer" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <sections:AccountModalView x:Name="AccountModalPanel" />
+    </Grid>
+</ContentPage>

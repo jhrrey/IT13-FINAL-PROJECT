@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 6. Footer: brand on the left, motto in the centre, "Back to top ↑" on the right. -->
+<sections:SectionView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:sections="clr-namespace:VetCare.Views.Sections"
+                      xmlns:controls="clr-namespace:VetCare.Views.Controls"
+                      xmlns:models="clr-namespace:VetCare.Models"
+                      x:Class="VetCare.Views.Sections.FooterView"
+                      x:DataType="models:LandingContent">
+
+    <Grid>
+        <BoxView HeightRequest="1" Color="{StaticResource BorderColor}" VerticalOptions="Start" />
+
+        <Grid x:Name="Container"
+              HorizontalOptions="Center"
+              Padding="0,32"
+              ColumnDefinitions="*,*,*"
+              RowDefinitions="Auto,Auto,Auto"
+              RowSpacing="10">
+
+            <!-- Spans share a baseline, so "Veterinary Clinic" sits next to "VetCare". -->
+            <Label x:Name="BrandLabel" VerticalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Brand.Name}"
+                              FontFamily="NunitoExtraBold"
+                              FontSize="22"
+                              TextColor="{StaticResource Navy}" />
+                        <Span Text="  " />
+                        <Span Text="{Binding Brand.Tagline}"
+                              FontSize="14"
+                              TextColor="{StaticResource BodyText}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label x:Name="MottoLabel"
+                   Grid.Column="1"
+                   Text="{Binding Footer.Motto}"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center" />
+
+            <controls:TextLink x:Name="BackToTop"
+                               Grid.Column="2"
+                               Text="{Binding Footer.BackToTop, StringFormat='{0} ↑'}"
+                               StyleClass="link"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Clicked="OnBackToTopClicked" />
+        </Grid>
+    </Grid>
+</sections:SectionView>

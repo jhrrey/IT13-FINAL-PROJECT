@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Appointments (PET CARE → Appointments): Queue, Calendar and List views.
+     Cards, calendar grid and table rows are built in AppointmentsPage.xaml.cs. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Staff.AppointmentsPage">
+
+    <ScrollView x:Name="PageScroll">
+        <VerticalStackLayout Padding="40,32,40,40" Spacing="20">
+
+            <!-- Page header -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16" Margin="0,0,0,4">
+                <controls:PageHeader Icon="calendar-days" Title="Appointments" Subtitle="Every visit, from hello to all done." />
+                <HorizontalStackLayout x:Name="HeaderButtons" Grid.Column="1" Spacing="10" VerticalOptions="End">
+                    <controls:IconTextButton x:Name="WalkInButton" Icon="footprints" Text="Walk-in" Outline="True" />
+                    <controls:IconTextButton x:Name="BookButton" Icon="plus" Text="Book appointment" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!-- Summary cards -->
+            <Grid x:Name="SummaryGrid" ColumnSpacing="16" RowSpacing="16" />
+
+            <!-- Toolbar -->
+            <Border Style="{StaticResource WorkspaceCard}" Padding="14">
+                <VerticalStackLayout Spacing="12">
+                    <!-- Row 1: date navigation | view switch -->
+                    <Grid x:Name="ToolbarTop" ColumnDefinitions="*,Auto" ColumnSpacing="12" RowSpacing="12">
+                        <HorizontalStackLayout x:Name="DateNav" Spacing="8" VerticalOptions="Center">
+                            <controls:HoverButton x:Name="TodayButton" Style="{StaticResource OutlineButton}" Text="Today" HeightRequest="40" Padding="16,0" />
+                            <Border x:Name="PrevDayButton" WidthRequest="40" HeightRequest="40" Stroke="{StaticResource BorderColor}" StrokeThickness="1" StrokeShape="RoundRectangle 6" BackgroundColor="{StaticResource Surface}" SemanticProperties.Description="Previous day">
+                                <controls:LucideIcon Icon="chevron-left" StrokeColor="{StaticResource Navy}" WidthRequest="18" HeightRequest="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <Border x:Name="NextDayButton" WidthRequest="40" HeightRequest="40" Stroke="{StaticResource BorderColor}" StrokeThickness="1" StrokeShape="RoundRectangle 6" BackgroundColor="{StaticResource Surface}" SemanticProperties.Description="Next day">
+                                <controls:LucideIcon Icon="chevron-right" StrokeColor="{StaticResource Navy}" WidthRequest="18" HeightRequest="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <!-- The date opens a calendar: an invisible DatePicker lies over the label. -->
+                            <Grid VerticalOptions="Center" Margin="6,0,0,0">
+                                <HorizontalStackLayout Spacing="8">
+                                    <Label x:Name="DateLabel" FontFamily="DMSansBold" FontSize="17" TextColor="{StaticResource Navy}" VerticalOptions="Center" />
+                                    <controls:LucideIcon Icon="chevron-down" StrokeColor="{StaticResource Navy}" WidthRequest="16" HeightRequest="16" VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                                <DatePicker x:Name="DatePickerOverlay" Opacity="0.01" />
+                            </Grid>
+                        </HorizontalStackLayout>
+
+                        <!-- List view shows every date instead of one day. -->
+                        <Label x:Name="AllDatesLabel"
+                               IsVisible="False"
+                               Text="All dates, newest first"
+                               FontFamily="DMSansBold"
+                               FontSize="16"
+                               TextColor="{StaticResource Navy}"
+                               VerticalOptions="Center" />
+
+                        <!-- Queue / Calendar / List -->
+                        <Border x:Name="ViewSwitch"
+                                Grid.Column="1"
+                                HeightRequest="42"
+                                Padding="3"
+                                Stroke="{StaticResource BorderColor}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 8"
+                                BackgroundColor="{StaticResource Surface}"
+                                HorizontalOptions="Start">
+                            <HorizontalStackLayout x:Name="ViewSwitchRow" Spacing="2" />
+                        </Border>
+                    </Grid>
+
+                    <!-- Row 2: filters -->
+                    <Grid x:Name="FilterGrid" ColumnDefinitions="200,180,*" ColumnSpacing="12" RowSpacing="12">
+                        <Border x:Name="VetBox" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                            <Picker x:Name="VetPicker" FontFamily="DMSans" FontSize="15" TextColor="{StaticResource Navy}" BackgroundColor="Transparent" VerticalOptions="Center" />
+                        </Border>
+                        <Border x:Name="StatusBox" Grid.Column="1" Style="{StaticResource InputBox}" HeightRequest="44" Padding="6,0">
+                            <Picker x:Name="StatusPicker" FontFamily="DMSans" FontSize="15" TextColor="{StaticResource Navy}" BackgroundColor="Transparent" VerticalOptions="Center" />
+                        </Border>
+                        <Border x:Name="SearchBox" Grid.Column="2" Style="{StaticResource InputBox}" HeightRequest="44" Padding="12,0">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <controls:LucideIcon Icon="search" StrokeColor="{StaticResource Muted}" WidthRequest="18" HeightRequest="18" VerticalOptions="Center" />
+                                <Entry x:Name="SearchEntry" Grid.Column="1" Style="{StaticResource InputEntry}" Placeholder="Search pet or owner" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Loading / error -->
+            <Border x:Name="StateCard" Style="{StaticResource WorkspaceCard}" Padding="8" IsVisible="False">
+                <ContentView x:Name="StateHost" />
+            </Border>
+
+            <!-- Queue view: 4 status columns (scroll sideways when narrow) -->
+            <ScrollView x:Name="QueueScroll" Orientation="Horizontal" IsVisible="False">
+                <Grid x:Name="QueueGrid" ColumnSpacing="12" />
+            </ScrollView>
+
+            <!-- Calendar view -->
+            <Border x:Name="CalendarCard" Style="{StaticResource WorkspaceCard}" Padding="0" IsVisible="False">
+                <VerticalStackLayout>
+                    <Grid Padding="16,12" ColumnDefinitions="*,Auto">
+                        <Label x:Name="CalendarTitle" FontFamily="DMSansBold" FontSize="15" TextColor="{StaticResource Navy}" VerticalOptions="Center" />
+                        <Border Grid.Column="1" Padding="3" Stroke="{StaticResource BorderColor}" StrokeThickness="1" StrokeShape="RoundRectangle 8" BackgroundColor="{StaticResource Surface}">
+                            <HorizontalStackLayout x:Name="CalendarModeRow" Spacing="2" />
+                        </Border>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{StaticResource BorderColor}" />
+                    <ScrollView x:Name="CalendarScroll" Orientation="Horizontal">
+                        <ContentView x:Name="CalendarHost" />
+                    </ScrollView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- List view -->
+            <Border x:Name="TableCard" Style="{StaticResource WorkspaceCard}" Padding="0" IsVisible="False">
+                <VerticalStackLayout>
+                    <ScrollView x:Name="TableScroll" Orientation="Horizontal">
+                        <VerticalStackLayout x:Name="TableStack" />
+                    </ScrollView>
+                    <ContentView x:Name="TableStateHost" IsVisible="False" />
+                    <Grid x:Name="PagerRow" Padding="20,14" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                        <BoxView Grid.ColumnSpan="3" HeightRequest="1" Color="{StaticResource BorderColor}" VerticalOptions="Start" Margin="-20,-14,-20,0" />
+                        <Label x:Name="PagerLabel" FontSize="14" TextColor="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <controls:HoverButton x:Name="PrevButton" Grid.Column="1" Style="{StaticResource OutlineButton}" Text="Prev" HeightRequest="36" Padding="14,0" />
+                        <controls:HoverButton x:Name="NextButton" Grid.Column="2" Style="{StaticResource OutlineButton}" Text="Next" HeightRequest="36" Padding="14,0" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

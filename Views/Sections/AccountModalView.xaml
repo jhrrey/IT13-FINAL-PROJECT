@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Account modal: blurs the page behind it and shows a two-column form, either clinic registration
+     (clinic details left, administrator account right) or the one-time Super Admin setup.
+     The fields are built from the model by AccountModalView.ShowForm. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:VetCare.Views.Controls"
+             x:Class="VetCare.Views.Sections.AccountModalView"
+             IsVisible="False">
+
+    <Grid>
+        <!-- Blurred, tinted page behind the dialog. Clicking it closes the modal. -->
+        <controls:BlurBackdrop x:Name="Backdrop" />
+
+        <Border x:Name="Dialog"
+                Style="{StaticResource ModalCard}"
+                WidthRequest="880"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+            <ScrollView>
+                <VerticalStackLayout x:Name="Body" Padding="40">
+
+                    <!-- Header -->
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16" Margin="0,0,0,32">
+                        <controls:IconBadge Icon="heart-pulse"
+                                            Size="52"
+                                            CircleColor="{StaticResource Cyan}"
+                                            IconColor="{StaticResource Navy}"
+                                            VerticalOptions="Start" />
+
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label x:Name="EyebrowLabel" StyleClass="eyebrow" Margin="0,0,0,6" />
+                            <Label x:Name="TitleLabel" StyleClass="modal-heading" />
+                            <Label x:Name="SubtextLabel" Margin="0,6,0,0" />
+                        </VerticalStackLayout>
+
+                        <Border x:Name="CloseButton"
+                                Grid.Column="2"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 20"
+                                BackgroundColor="Transparent"
+                                VerticalOptions="Start"
+                                SemanticProperties.Description="Close">
+                            <controls:LucideIcon Icon="x"
+                                                 StrokeColor="{StaticResource NavyMuted}"
+                                                 WidthRequest="20"
+                                                 HeightRequest="20"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
+
+                    <!-- Form: left = clinic details, right = account + button -->
+                    <Grid x:Name="ColumnsGrid"
+                          ColumnDefinitions="*,*"
+                          RowDefinitions="Auto,Auto"
+                          ColumnSpacing="32"
+                          RowSpacing="18">
+
+                        <VerticalStackLayout x:Name="LeftColumn" Spacing="18" />
+
+                        <VerticalStackLayout x:Name="RightColumn" Grid.Column="1">
+                            <VerticalStackLayout x:Name="RightFields" Spacing="18" />
+
+                            <controls:HoverButton x:Name="SubmitButton"
+                                                  Style="{StaticResource PrimaryButton}"
+                                                  Margin="0,26,0,0"
+                                                  Clicked="OnSubmitClicked" />
+
+                            <Label x:Name="StatusLabel"
+                                   StyleClass="status"
+                                   IsVisible="False"
+                                   Margin="0,14,0,0" />
+
+                            <Label x:Name="FootnoteLabel"
+                                   StyleClass="small"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="0,14,0,0" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Border>
+    </Grid>
+</ContentView>
